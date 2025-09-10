@@ -114,15 +114,12 @@ def retrieve_context(user_question: str) -> list[dict[str, Any]]:
 
 def augment_prompt(user_question: str, context: list[dict[str, Any]]) -> str:
     """Combine user query with retrieved context into a formatted prompt."""
-    if not context:
-        context_str = "No relevant user information found."
-    else:
-        context_str = ""
-        for user in context:
-            context_str += f"User:\n"
-            for key, value in user.items():
-                context_str += f"  {key}: {value}\n"
-            context_str += "\n"
+    context_str = ""
+    for user in context:
+        context_str += f"User:\n"
+        for key, value in user.items():
+            context_str += f"  {key}: {value}\n"
+        context_str += "\n"
 
     augmented_prompt = USER_PROMPT.format(context=context_str, query=user_question)
     print(augmented_prompt)
