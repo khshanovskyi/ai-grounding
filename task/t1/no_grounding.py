@@ -65,7 +65,7 @@ token_tracker = TokenTracker()
 
 def join_context(context: list[dict[str, Any]]) -> str:
     context_str = ""
-    for i, user in enumerate(context, 1):
+    for user in context:
         context_str += f"User:\n"
         for key, value in user.items():
             context_str += f"  {key}: {value}\n"
