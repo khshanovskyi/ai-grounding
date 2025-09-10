@@ -118,8 +118,8 @@ def augment_prompt(user_question: str, context: list[dict[str, Any]]) -> str:
         context_str = "No relevant user information found."
     else:
         context_str = ""
-        for i, user in enumerate(context, 1):
-            context_str += f"User {i}:\n"
+        for user in context:
+            context_str += f"User:\n"
             for key, value in user.items():
                 context_str += f"  {key}: {value}\n"
             context_str += "\n"
