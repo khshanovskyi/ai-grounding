@@ -73,8 +73,8 @@ def join_context(context: list[dict[str, Any]]) -> str:
     return context_str
 
 
-async def generate_batch_response(system_prompt: str, user_message: str) -> str:
-    print("Processing user batch...")
+async def generate_response(system_prompt: str, user_message: str) -> str:
+    print("Processing...")
 
     messages = [
         SystemMessage(content=system_prompt),
@@ -86,22 +86,6 @@ async def generate_batch_response(system_prompt: str, user_message: str) -> str:
     token_tracker.add_tokens(total_tokens)
 
     print(f"Response: \n {response.content}\nTokens used: {total_tokens}\n")
-    return response.content
-
-
-async def generate_final_answer(system_prompt: str, user_message: str) -> str:
-    print("Generating final answer...")
-
-    messages = [
-        SystemMessage(content=system_prompt),
-        HumanMessage(content=user_message)
-    ]
-    response = await llm_client.ainvoke(messages)
-    total_tokens = response.response_metadata.get('token_usage', {}).get("total_tokens", 0)
-
-    token_tracker.add_tokens(total_tokens)
-
-    print(f"Final answer generated. Tokens used: {total_tokens}\n")
     return response.content
 
 
@@ -118,7 +102,7 @@ async def main():
 
         # Process batches to find relevant users
         tasks = [
-            generate_batch_response(
+            generate_response(
                 system_prompt=BATCH_SYSTEM_PROMPT,
                 user_message=USER_PROMPT.format(
                     context=join_context(user_batch),
@@ -133,22 +117,20 @@ async def main():
 
         relevant_results = [result for result in batch_results if result.strip() != "NO_MATCHES_FOUND"]
 
+        print(f"\n=== SEARCH RESULTS ===")
         if relevant_results:
             combined_results = "\n\n".join(relevant_results)
 
-            final_answer = await generate_final_answer(
+            await generate_response(
                 system_prompt=FINAL_SYSTEM_PROMPT,
                 user_message=f"SEARCH RESULTS:\n{combined_results}\n\nORIGINAL QUERY: {user_question}"
             )
 
-            print(f"\n=== SEARCH RESULTS ===")
-            print(final_answer)
         else:
             print(f"\n=== SEARCH RESULTS ===")
             print(f"No users found matching '{user_question}'")
             print("\nTry refining your search or using different keywords.")
 
-        # Show token usage
         summary = token_tracker.get_summary()
         print(f"\n=== Performance ===")
         print(f"Total API calls: {summary['batch_count']}")
