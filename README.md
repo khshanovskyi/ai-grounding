@@ -51,6 +51,8 @@ task/
 
 ## 📊 Grounding Approaches
 
+### If the task in the main branch is hard for you, then switch to the `with-detailed-description` branch
+
 ### 1. No Grounding (`t1/no_grounding.py`)
 Direct LLM processing without external knowledge integration.
 
