@@ -108,7 +108,7 @@ def retrieve_context(user_question: str) -> list[dict[str, Any]]:
         print(f"Searching with parameters: {requests_dict}")
         return user_client.search_users(**requests_dict)
 
-    print("No specific search parameters found, searching all users...")
+    print("No specific search parameters found!")
     return []
 
 
