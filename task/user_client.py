@@ -1,5 +1,4 @@
-import json
-from typing import Any, Optional, Annotated
+from typing import Any, Optional
 
 import requests
 
