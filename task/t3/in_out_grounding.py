@@ -183,7 +183,6 @@ class OutputGrounder:
         tasks = [safe_get_user(user_id) for user_id in ids]
         users_results = await asyncio.gather(*tasks)
 
-        # Filter out None values (404 users)
         return [user for user in users_results if user is not None]
 
 
