@@ -186,7 +186,7 @@ class OutputGrounder:
             try:
                 #TODO:
                 # Get user by id (it is async method)
-
+                raise NotImplementedError
             except Exception as e:
                 if "404" in str(e):
                     print(f"User with ID {user_id} is absent (404)")
