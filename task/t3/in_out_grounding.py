@@ -1,5 +1,5 @@
 import asyncio
-from typing import Any
+from typing import Any, Optional
 
 from langchain_chroma import Chroma
 from langchain.schema import HumanMessage
@@ -171,12 +171,19 @@ class OutputGrounder:
 
 
     async def _find_users(self, ids: list[int]) -> list[dict[str, Any]]:
-        tasks = [
-            self.user_client.get_user(user_id) for user_id in ids
-        ]
-        users_lists = await asyncio.gather(*tasks)
-        return users_lists
+        async def safe_get_user(user_id: int) -> Optional[dict[str, Any]]:
+            try:
+                return await self.user_client.get_user(user_id)
+            except Exception as e:
+                if "404" in str(e):
+                    print(f"User with ID {user_id} is absent (404)")
+                    return None
+                raise  # Re-raise non-404 errors
 
+        tasks = [safe_get_user(user_id) for user_id in ids]
+        users_results = await asyncio.gather(*tasks)
+
+        return [user for user in users_results if user is not None]
 
 async def main():
     embeddings = AzureOpenAIEmbeddings(
