@@ -118,5 +118,5 @@ if __name__ == "__main__":
 # The problems with No Grounding approach are:
 #   - If we load whole users as context in one request to LLM we will hit context window
 #   - Huge token usage == Higher price per request
-#   - Wr added + one chain in flow where original user data can be changed by LLM
-#     User Question -> Get all users -> ‼️parallel search of possible candidates‼️ -> probably changed original context -> final generation
+#   - Added + one chain in flow where original user data can be changed by LLM (before final generation)
+# User Question -> Get all users -> ‼️parallel search of possible candidates‼️ -> probably changed original context -> final generation
