@@ -28,7 +28,8 @@ from task.user_client import UserClient
 #    'cold start' add all users for current moment to vectorstor and with each user request we will update vectorstor on
 #    the retrieval step, we will remove deleted users and add new - it will also resolve the issue with consistency
 #    within this 2 services and will reduce costs (we don't need on each user request load vectorstor from scratch and pay for it).
-# 3. We ask LLM make NER (Named Entity Recognition) and provide response in format:
+# 3. We ask LLM make NEE (Named Entity Extraction) https://cloud.google.com/discover/what-is-entity-extraction?hl=en
+#    and provide response in format:
 #    {
 #       "{hobby}": [{user_id}, 2, 4, 100...]
 #    }
