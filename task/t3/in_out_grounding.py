@@ -15,7 +15,7 @@ from task.user_client import UserClient
 # HOBBIES SEARCHING WIZARD
 # Before implementation open the `flow.png` to see the flow of app.
 # Searches users by hobbies and provides their full info in JSON format:
-#   Input: I need to gather people that love to go to mountains
+#   Input: I need people who love to go to mountains
 #   Output:
 #     rock climbing: [{full user info JSON},...],
 #     hiking: [{full user info JSON},...],
@@ -213,8 +213,8 @@ async def main():
 
     async with InputGrounder(embeddings, llm_client) as rag:
         print("Query samples:")
-        print(" - I need to gather people that love to go to mountains")
-        print(" - Find people that love to watch stars and night sky")
+        print(" - I need people who love to go to mountains")
+        print(" - Find people who love to watch stars and night sky")
         print(" - I need people to go to fishing together")
 
         while True:
