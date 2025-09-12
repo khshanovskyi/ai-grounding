@@ -15,7 +15,7 @@ from task.user_client import UserClient
 # HOBBIES SEARCHING WIZARD
 # Before implementation open the `flow.png` to see the flow of app.
 # Searches users by hobbies and provides their full info in JSON format:
-#   Input: In need to gather people that love to go to mountains
+#   Input: I need to gather people that love to go to mountains
 #   Output:
 #     rock climbing: [{full user info JSON},...],
 #     hiking: [{full user info JSON},...],
