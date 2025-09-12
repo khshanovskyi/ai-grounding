@@ -14,7 +14,7 @@ from task.user_client import UserClient
 #TODO: Info about app:
 # HOBBIES SEARCHING WIZARD
 # Searches users by hobbies and provides their full info in JSON format:
-#   Input: `In need to gather people that love to go to mountains`
+#   Input: `I need to gather people that love to go to mountains`
 #   Output:
 #     ```json
 #       "rock climbing": [{full user info JSON},...],
