@@ -197,8 +197,8 @@ async def main():
 
     async with InputGrounder(embeddings, llm_client) as rag:
         print("Query samples:")
-        print(" - I need to gather people that love to go to mountains")
-        print(" - Find people that love to watch stars and night sky")
+        print(" - I need people who love to go to mountains")
+        print(" - Find people who love to watch stars and night sky")
         print(" - I need people to go to fishing together")
 
         while True:
